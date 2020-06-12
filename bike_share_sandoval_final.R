@@ -208,12 +208,12 @@ s3<-subset(chi$log_trip_minutes, is.na(chi$sex))
 
 #QUESTION 3: What is the impact of treating the data differently with the mice package when performing multiple imputation?
 #3 approaches:
-#1: ignore the extremes in age and see how sex and age is imputed
-#2: set the extreme ages to missing and impute age and sex all at once, even though setting age to missing makes the data non-monotone
-#3: do a sequential multiple imputation to satisfy monotonicity. Impute sex first. then impute age using imputed sex dataset
+#1: Ignore the extremes in age and see how sex and age is imputed by MICE.
+#2: Set the extreme ages to missing and impute age and sex all at once, even though setting age to missing makes the data non-monotone
+#3: Perform sequential multiple imputations to satisfy monotonicity. Impute sex first. Then impute age using imputed sex dataset.
 
 
-#approach for imputation 1: be sloppy in the analysis and ignore the extreme ages to impute age and sex
+#Approach for imputation 1: be sloppy in the analysis and ignore the extremes in age to impute age and sex
 
 #selecting columns of data for chi2 from original dataset, so it takes less time
 chi2<-chi[,c(12,13, 14)]
