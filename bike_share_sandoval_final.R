@@ -607,7 +607,61 @@ xb2<-(summary2a$trip_min2_mean + summary2a$trip_min2_sd)
 xc1<-(summary3a$tripmin3_mean - summary3a$tripmin3_sd) 
 xc2<-(summary3a$tripmin3_mean + summary3a$tripmin3_sd) 
 
+#performing independent t-tests to see if there was a significant difference in trip minutes
+#I am not assuming equal variances since it's a safter assumption
+#since 4 tests, alpha=0.05, 0.05/4, p must be less than 0.0125 for significance
 
+#original data t-test for trip minutes by sex-->is significant
+t0a<-t.test(chi_complete_overall2$trip_minutes ~ chi_complete_overall2$orig_sex, na.rm=FALSE) 
+
+#imputation 1 t-test for trip min by sex-note that the difference is much larger, although the p-value is the same
+t1a<-t.test(chi_complete_overall2$trip_minutes ~ chi_complete_overall2$imp_sex1, var.equal=FALSE) 
+
+##imputation 2 t-test for trip min by sex-similar to last one
+t2a<-t.test(chi_complete_overall2$trip_minutes ~ chi_complete_overall2$imp_sex2, var.equal=FALSE) 
+
+##imputation 3 t-test for trip min by sex-diff similar to previous imputations
+t3a<-t.test(chi_complete_overall2$trip_minutes ~chi_complete_overall2$imp_sex3, var.equal=FALSE) 
+
+#Question 5 answer:imputation of sex did have an impact on detetcing differences in mean trip distance
+
+#--------------------------------------------------------------------------------------------------------#
+
+##Question 6: was there a significant change in the mean trip distance with sex?. 
+
+#performing one sample t-test of mean trip minutes by sex with each imputation against 
+#the mean of the original data
+
+#data are already subsetted
+#imputation 1 male trip distance versus original data set  for male-is sig
+m1a<-t.test(ss1a$trip_min1, mu = 11.2 , alternative = "two.sided")
+
+#imputation 1 female age versus original data set age for female- also sig
+f1a<-t.test(ss1b$trip_min1, mu = 13.0 , alternative = "two.sided")
+
+#also did log trip minutes by sex, it is hard to interpret though. 
+m1b<-t.test(ss1a$log_trip_minutes, mu = 0.95 , alternative = "two.sided")
+#performed log_trip min since it is skewed, more difficult to interpret
+f1b<-t.test(ss1a$log_trip_minutes, mu = 1.018 , alternative = "two.sided")
+
+#imputation 1 male trip min versus original data male trip min
+m2a<-t.test(ss2a$trip_min2, mu = 11.2 , alternative = "two.sided")
+
+#imputation 1 female trip min versus original data female trip min-is also sig
+f2a<-t.test(ss2b$trip_min2, mu = 13.0 , alternative = "two.sided")
+
+
+#imputation 3 male trip minutes versus trip minutes for male from the original dataset-sig
+m4a<-t.test(ss4a$tripmin3, mu = 11.2 , alternative = "two.sided")
+
+#imputation 3 female trip minutes versus trip minutes for female in original dataset-sig
+f4a<-t.test(ss4b$tripmin3, mu = 13.0 , alternative = "two.sided")
+
+
+#Answer question 6: There was a significant increase in the mean trip minutes for each sex compared 
+#to the original data,making it easier to detect differences.
+
+#Graphs for analysis
 # mean as a dot with standard deviation in the error bars
 #original data mean trip minutes plus standard deviation by sex
 #I placed a reference line for mean trip minutes for male (in blue) and female (in red),
@@ -722,61 +776,5 @@ plot4<-ggplot(summary3a, aes(x=sex3, y=tripmin3_mean)) +
 
 #putting all these graphs together, so they can be compared
 grid.arrange(plot1,plot2, plot3, plot4, nrow = 1, ncol=4)
-
-#performing independent t-tests to see if there was a significant difference in trip minutes
-#I am not assuming equal variances since it's a safter assumption
-#since 4 tests, alpha=0.05, 0.05/4, p must be less than 0.0125 for significance
-
-#original data t-test for trip minutes by sex-->is significant
-t0a<-t.test(chi_complete_overall2$trip_minutes ~ chi_complete_overall2$orig_sex, na.rm=FALSE) 
-
-#imputation 1 t-test for trip min by sex-note that the difference is much larger, although the p-value is the same
-t1a<-t.test(chi_complete_overall2$trip_minutes ~ chi_complete_overall2$imp_sex1, var.equal=FALSE) 
-
-##imputation 2 t-test for trip min by sex-similar to last one
-t2a<-t.test(chi_complete_overall2$trip_minutes ~ chi_complete_overall2$imp_sex2, var.equal=FALSE) 
-
-##imputation 3 t-test for trip min by sex-diff similar to previous imputations
-t3a<-t.test(chi_complete_overall2$trip_minutes ~chi_complete_overall2$imp_sex3, var.equal=FALSE) 
-
-#Question 5 answer:imputation of sex did have an impact on detetcing differences in mean trip distance
-
-#--------------------------------------------------------------------------------------------------------#
-
-##Question 6: was there a significant change in the mean trip distance with sex?. 
-
-#performing one sample t-test of mean trip minutes by sex with each imputation against 
-#the mean of the original data
-
-#data are already subsetted
-#imputation 1 male trip distance versus original data set  for male-is sig
-m1a<-t.test(ss1a$trip_min1, mu = 11.2 , alternative = "two.sided")
-
-#imputation 1 female age versus original data set age for female- also sig
-f1a<-t.test(ss1b$trip_min1, mu = 13.0 , alternative = "two.sided")
-
-#also did log trip minutes by sex, it is hard to interpret though. 
-m1b<-t.test(ss1a$log_trip_minutes, mu = 0.95 , alternative = "two.sided")
-#performed log_trip min since it is skewed, more difficult to interpret
-f1b<-t.test(ss1a$log_trip_minutes, mu = 1.018 , alternative = "two.sided")
-
-#imputation 1 male trip min versus original data male trip min
-m2a<-t.test(ss2a$trip_min2, mu = 11.2 , alternative = "two.sided")
-
-#imputation 1 female trip min versus original data female trip min-is also sig
-f2a<-t.test(ss2b$trip_min2, mu = 13.0 , alternative = "two.sided")
-
-
-#imputation 3 male trip minutes versus trip minutes for male from the original dataset-sig
-m4a<-t.test(ss4a$tripmin3, mu = 11.2 , alternative = "two.sided")
-
-#imputation 3 female trip minutes versus trip minutes for female in original dataset-sig
-f4a<-t.test(ss4b$tripmin3, mu = 13.0 , alternative = "two.sided")
-
-
-#Answer question 6: There was a significant increase in the mean trip minutes for each sex compared 
-#to the original data,making it easier to detect differences.
-
-
 
 
