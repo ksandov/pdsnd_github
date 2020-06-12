@@ -9,9 +9,13 @@ This project used three different methods to determine how the Multiple Imputati
 
 ### Files used
 chicago.csv #original file 
+
 chi_complete_1.csv #complete dataset obtained for approach 1 
+
 chi_complete_2.csv #complete dataset obtained from approach 2 
+
 chi_complete_3.csv #first part of dataset for approach 3 
+
 chi_complete_4.csv #second part of approach 3 and complete dataset for approach 3
 
 ### Credits <:3)~
