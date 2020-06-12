@@ -1,8 +1,8 @@
 ### Date created
-Include the date you created this project and README file.
+06/11/20
 
 ### Project Title
-Replace the Project Title
+Use of Multiple Imputation by Chained Equations (MICE) R package to impute missing data obtained from a Chicago bike share program
 
 ### Description
 Describe what your project is about and what it does
