@@ -14,6 +14,14 @@ chi_complete_2.csv #complete dataset obtained from approach 2
 chi_complete_3.csv #first part of dataset for approach 3 
 chi_complete_4.csv #second part of approach 3 and complete dataset for approach 3
 
-### Credits
-It's important to give proper credit. Add links to any repo that inspired you or blogposts you consulted.
+### Credits <:3)~
+#MICE github repository 
+https://github.com/stefvanbuuren/mice.git
+
+#More information on the MICE R package 
+https://stefvanbuuren.name/mice/
+
+#A wonderful and very useful book on MICE 
+https://stefvanbuuren.name/fimd/
+
 
